@@ -7,8 +7,12 @@ import { CustomerClass } from '../modelClasses/customer.model';
 })
 export class UtilityService {
 
-  headers=['CustomerId','FirstName','LastName','Email','PhoneNumber','CountryCode','Gender','Balance'];
-
+  private headers=['CustomerId','FirstName','LastName','Email','PhoneNumber','CountryCode','Gender','Balance'];
+  private currency=['USD','CAD','INR'];
+  private countriesInfo=[{code:'US',codeAlpha:'USA',name:'Unites States',teleCode:"+1"},
+                         {code:'CA',codeAlpha:'CAN',name:'Canada',teleCode:"+1"},
+                         {code:'IN',codeAlpha:'IND',name:'India',teleaCode:"+91"}];
+  private genderList=[{key:'Male',value:'M'},{key:'Female',value:'F'}];
   constructor() { }
   filterHeaders(srcData:CustomerInterface[]):any[]{
     let customersFilteredData: CustomerClass[]=[];
@@ -19,7 +23,13 @@ export class UtilityService {
     })
     return customersFilteredData;
   }
-  getHeeaders():string[]{
+  getHeaders():string[]{
     return this.headers;
+  }
+  getGenderList():any[]{
+    return this.genderList;
+  }
+  getCountriesList():any[]{
+    return this.countriesInfo;
   }
 }

@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   api:'https://getinvoices.azurewebsites.net/api/',
   getCustomersRoute:'Customers',
-  postCustomerRoute:'Customer'
+  postCustomerRoute:'Customer',
+  deleteCustomerRoute:'Customer',
+  getCustomerByIdRoute:'Customer'
 };
 
 /*

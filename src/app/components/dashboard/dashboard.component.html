@@ -1,7 +1,7 @@
 <h1>Dashboard</h1>
 <button class="btn btn-primary" (click)="add()">ADD NEW CUSTOMER</button>
 <div *ngIf="customersData && customersData.length">
-<div>Existing Customers</div>
+<div><h3>Existing Customers</h3></div>
 <table class="table" >
   <thead>
   <tr>
@@ -13,15 +13,16 @@
 <tbody>
   <tr *ngFor="let customer of customersData">
     <td *ngFor="let header of customerHeaders">
-      <span *ngIf="header === 'email'"><a href="mailto:{{ customer[header] }}">{{customer[header]}}</a></span>
-      <span *ngIf="header === 'balance'">{{customer[header] | currency}}</span>
-      <span *ngIf="header != 'balance' && header != 'email'">{{customer[header]}}</span>
+     
+      <a *ngIf="header.toLowerCase() === 'email'" href="mailto:{{ customer[header] }}">{{customer[header]}}</a>
+      <span *ngIf="header.toLowerCase() === 'balance'">{{(customer[header]) | currency}}</span>
+      <span *ngIf="header.toLowerCase() != 'balance' && header.toLowerCase() != 'email'">{{customer[header]}}</span>
     </td>
     <td>
-      <button (click)="delete($event,customer)">Delete</button>
+      <button class="btn btn-danger" (click)="delete($event,customer)">Delete</button>
     </td>
     <td>
-      <button (click)="edit($event,customer)">Edit</button>
+      <button class="btn btn-secondary" (click)="edit($event,customer)">Edit</button>
     </td>
   </tr>
 </tbody>

@@ -1,4 +1,5 @@
 <h1>Add Customer</h1>
+<div><button (click)="backtoHome()">Back to Home</button></div>
 <div class="add-form-container">
 <form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
     <div class="form-control-container">
@@ -50,7 +51,7 @@
             <div class="form-control-container">
                 <div><label for="gender">Gender</label></div>
                 <div><select id="gender" formControlName="gender">
-                    <option *ngFor="let op of genderList" [ngValue]="op.value">{{op.key}}</option>
+                    <option *ngFor="let op of getGenderList()" [ngValue]="op.value">{{op.key}}</option>
                 </select>
                 </div>
                 <div>
@@ -60,11 +61,32 @@
                 
                 </div>
             </div>
+            <div class="form-control-container">
+                <div><label for="country-code">Country</label></div>
+                <div><select id="country-code" formControlName="countryCode">
+                    <option *ngFor="let op of getCountriesList()" [ngValue]="op.code">{{op.name}}</option>
+                </select>
+                </div>
+               
+            </div>
 
             <div class="form-control-container">
                 <div><label for="balance">*Balance:</label></div>
                 <div><input id="balance" type="text" formControlName="balance"/></div>
                 </div>
+
+            <div class="form-control-container">
+                <div>
+                    <div><label for="password">*Password:</label></div>
+                <div><input id="password" type="password" formControlName="password"/></div>
+                <div>
+                    <span class="text-danger" *ngIf="addCustomerForm.get('password')?.errors 
+                                                && addCustomerForm.get('password')?.hasError('required')
+                                                && addCustomerForm.get('password')?.touched">*Password is required</span>
+                
+                </div>
+                </div>
+            </div>
 
             <div>
                 <span *ngIf="addCustomerForm.touched && !addCustomerForm.valid">The form is invalid, fill correctly.</span>

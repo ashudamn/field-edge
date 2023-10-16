@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CustomerInterface } from 'src/app/modelsInterfaces/CustomerInterface.model';
 import { UtilityService } from 'src/app/services/utility.service';
+import { catchError, throwError } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -30,11 +31,19 @@ export class DashboardComponent implements OnInit {
   populateRowAndHeaders(){
     if(this.customersResponseData && this.customersResponseData.length>0){
       this.customersData=this.utilityService.filterHeaders(this.customersResponseData);
-      this.customerHeaders=this.utilityService.getHeeaders();
+      this.customerHeaders=this.utilityService.getHeaders();
     }
   }
   delete(event:any,customer:any){
     console.log("delete",customer);
+    this.customerService.deleteCustomer(customer.CustomerId).pipe(catchError(error=>{
+      console.log(error);
+      return throwError(error);
+    })
+    ).subscribe(data=>{
+      console.log(data);
+    });
+    
   }
   edit(event:any,customer:any){
     console.log("edit",customer);
