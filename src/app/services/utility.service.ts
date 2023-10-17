@@ -14,7 +14,7 @@ export class UtilityService {
                          {code:'IN',codeAlpha:'IND',name:'India',teleaCode:"+91"}];
   private genderList=[{key:'Male',value:'M'},{key:'Female',value:'F'}];
   constructor() { }
-  filterHeaders(srcData:CustomerInterface[]):any[]{
+  filterHeaders(srcData:CustomerInterface[]):CustomerClass[]{
     let customersFilteredData: CustomerClass[]=[];
     srcData.forEach((element)=>{
       let tempObject= new CustomerClass(element['id'],element['firstname'],element['lastname'],element['email'],element['phone_Number'],element['country_code'],element['gender'],element['balance']);
