@@ -5,7 +5,6 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { CustomerInterface } from 'src/app/modelsInterfaces/CustomerInterface.model';
 import { UtilityService } from 'src/app/services/utility.service';
 import { catchError, throwError } from 'rxjs';
-import { CustomerClass } from 'src/app/modelClasses/customer.model';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -48,6 +47,7 @@ export class DashboardComponent implements OnInit {
   }
   edit(event:any,customer:any){
     console.log("edit",customer);
+    this.router.navigateByUrl(`/edit/${customer.CustomerId}`);
   }
   add(){
     console.log("add");

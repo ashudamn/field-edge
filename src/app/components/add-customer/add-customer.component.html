@@ -1,10 +1,10 @@
 <h1>Add Customer</h1>
-<div><button (click)="backtoHome()">Back to Home</button></div>
+<div class="back-home-btn-container"><button class="btn primary border-black " (click)="backtoHome()">Back to Home</button></div>
 <div class="add-form-container">
 <form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
     <div class="form-control-container">
     <div><label for="first-name">*First Name:</label></div>
-    <div><input id="first-name" type="text" formControlName="firstName"/></div>
+    <div><input class="wd-25-pct" id="first-name" type="text" formControlName="firstName"/></div>
     <div><span class="text-danger" *ngIf="addCustomerForm.get('firstName')?.errors 
                                     && addCustomerForm.get('firstName')?.hasError('required')
                                     && addCustomerForm.get('firstName')?.touched">First Name is required</span>
@@ -12,7 +12,7 @@
     </div>
     <div class="form-control-container">
         <div><label for="last-name">*Last Name:</label></div>
-        <div><input id="last-name" type="text" formControlName="lastName"/></div>
+        <div><input class="wd-25-pct" id="last-name" type="text" formControlName="lastName"/></div>
         <div><span class="text-danger" *ngIf="addCustomerForm.get('lastName')?.errors 
                                         && addCustomerForm.get('lastName')?.hasError('required')
                                         && addCustomerForm.get('lastName')?.touched">Last Name is required</span>
@@ -20,7 +20,7 @@
         </div>
         <div class="form-control-container">
             <div><label for="email">*Email:</label></div>
-            <div><input id="email" type="email" formControlName="email"/></div>
+            <div><input class="wd-25-pct" id="email" type="email" formControlName="email"/></div>
             <div><span class="text-danger" *ngIf="addCustomerForm.get('email')?.errors 
                                             && addCustomerForm.get('email')?.hasError('required')
                                             && addCustomerForm.get('email')?.touched">Email is required</span>
@@ -33,7 +33,7 @@
 
             <div class="form-control-container">
                 <div><label for="phone-number">*Phone Number:</label></div>
-                <div><input id="phone-number" type="text" formControlName="phoneNumber"/></div>
+                <div><input class="wd-25-pct" id="phone-number" type="text" formControlName="phoneNumber"/></div>
                 <div><span class="text-danger" *ngIf="addCustomerForm.get('phoneNumber')?.errors 
                                                 && addCustomerForm.get('phoneNumber')?.hasError('required')
                                                 && addCustomerForm.get('phoneNumber')?.touched">phone number is required</span>
@@ -50,7 +50,7 @@
 
             <div class="form-control-container">
                 <div><label for="gender">Gender</label></div>
-                <div><select id="gender" formControlName="gender">
+                <div><select class="wd-25-pct" id="gender" formControlName="gender">
                     <option *ngFor="let op of getGenderList()" [ngValue]="op.value">{{op.key}}</option>
                 </select>
                 </div>
@@ -63,7 +63,7 @@
             </div>
             <div class="form-control-container">
                 <div><label for="country-code">Country</label></div>
-                <div><select id="country-code" formControlName="countryCode">
+                <div><select class="wd-25-pct" id="country-code" formControlName="countryCode">
                     <option *ngFor="let op of getCountriesList()" [ngValue]="op.code">{{op.name}}</option>
                 </select>
                 </div>
@@ -72,13 +72,13 @@
 
             <div class="form-control-container">
                 <div><label for="balance">*Balance:</label></div>
-                <div><input id="balance" type="text" formControlName="balance"/></div>
+                <div><input class="wd-25-pct" id="balance" type="text" formControlName="balance"/></div>
                 </div>
 
             <div class="form-control-container">
                 <div>
                     <div><label for="password">*Password:</label></div>
-                <div><input id="password" type="password" formControlName="password"/></div>
+                <div><input class="wd-25-pct" id="password" type="password" formControlName="password"/></div>
                 <div>
                     <span class="text-danger" *ngIf="addCustomerForm.get('password')?.errors 
                                                 && addCustomerForm.get('password')?.hasError('required')
@@ -92,7 +92,7 @@
                 <span *ngIf="addCustomerForm.touched && !addCustomerForm.valid">The form is invalid, fill correctly.</span>
             </div>
             <div class="add-form-submit-btn">
-            <button class="btn btn-secondary" type="submit">Submit</button>
+            <button class="btn btn-secondary wd-25-pct" type="submit">Submit</button>
         </div>
 </form>
 </div>

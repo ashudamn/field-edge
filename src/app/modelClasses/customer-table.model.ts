@@ -1,4 +1,4 @@
-export class CustomerClass {
+export class CustomerTable {
   CustomerId: string;
   FirstName: string;
   LastName: string;

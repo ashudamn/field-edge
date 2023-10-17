@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CustomerInterface } from '../modelsInterfaces/CustomerInterface.model';
 import { Observable } from 'rxjs';
-import { CreateCustomer } from '../modelClasses/create-customer.model';
+import { Customer } from '../modelClasses/create-customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,15 @@ export class CustomerService {
   getCustomers(){
     return this.httpClient.get<CustomerInterface[]>(`${environment.api}${environment.getCustomersRoute}`);
   }
-  postCustomer(customer:CreateCustomer):Observable<any>{
+  postCustomer(customer:Customer):Observable<any>{
     const headers={'content-type':'application/json'};
-    const jsonString=JSON.stringify(customer);
-    return this.httpClient.post(`${environment.api}${environment.postCustomerRoute}`,jsonString,{'headers':headers});
+    const jsonStringBody=JSON.stringify(customer);
+    return this.httpClient.post(`${environment.api}${environment.postCustomerRoute}`,jsonStringBody,{'headers':headers});
   }
   deleteCustomer(id:string){
     return this.httpClient.delete(`${environment.api}${environment.deleteCustomerRoute}/${id}`);
+  }
+  getCustomerByid(id:string|null){
+    return this.httpClient.get(`${environment.api}${environment.getCustomerByIdRoute}/${id}`);
   }
 }

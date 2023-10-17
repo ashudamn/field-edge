@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError,pipe, throwError } from 'rxjs';
 
-import { CreateCustomer } from 'src/app/modelClasses/create-customer.model';
+import { Customer } from 'src/app/modelClasses/create-customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
@@ -35,9 +35,14 @@ export class AddCustomerComponent implements OnInit {
 
   }
   onSubmit(){
+    if(this.addCustomerForm.invalid){
+      console.log("form invalid");
+      return;
+    }
       console.log(this.addCustomerForm);
       console.log(this.addCustomerForm.value);
       let randomWholeNumber=Math.floor(Math.random()*1000+1);
+      let customerId=randomWholeNumber.toString();
       let salutation=this.addCustomerForm.value.gender==='M'?'Mr.':'Mrs.';
       let initials=this.addCustomerForm.value.firstName[0]+".";
       let countryCodeAlpha='USA';
@@ -45,18 +50,22 @@ export class AddCustomerComponent implements OnInit {
       let primaryLanguageCode="en";
       let primaryLanguage="English";
       let currency="USD";
-      let customer:CreateCustomer=new CreateCustomer(randomWholeNumber.toString(),
+      let country_rank= randomWholeNumber.toString();
+      let country_frequency=(randomWholeNumber+1000).toString();
+      let fname_ascii= this.addCustomerForm.value.firstName.toLowerCase();
+      let lname_ascii= this.addCustomerForm.value.lastName.toLowerCase();
+      let customer:Customer=new Customer(customerId,
                                                       salutation,
                                                       initials,
                                                       this.addCustomerForm.value.firstName,
-                                                      this.addCustomerForm.value.firstName.toLowerCase(),
+                                                      fname_ascii,
                                                       this.addCustomerForm.value.gender,
-                                                      randomWholeNumber.toString(),
-                                                      (randomWholeNumber+1000).toString(),
+                                                      country_rank,
+                                                      country_frequency,
                                                       this.addCustomerForm.value.lastName,
-                                                      this.addCustomerForm.value.lastName.toLowerCase(),
-                                                      (randomWholeNumber).toString(),
-                                                      (randomWholeNumber+1000).toString(),
+                                                      lname_ascii,
+                                                      country_rank,
+                                                      country_frequency,
                                                       this.addCustomerForm.value.email,
                                                       this.addCustomerForm.value.password,
                                                       this.addCustomerForm.value.countryCode,

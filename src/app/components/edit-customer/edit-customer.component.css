@@ -1,15 +1,14 @@
 .text-danger{
     color: brown;
 }
-.add-form-container{
+.edit-form-container{
     padding: 10px;
 }
-.add-form-submit-btn{
+.edit-form-submit-btn{
     padding-top: 10px;
 }
-.back-home-btn-container{
-    padding: 10px;
-    text-align: right;
+.border-black{
+    border: 1px solid black;
 }
 .wd-25-pct{
     width: 25%;

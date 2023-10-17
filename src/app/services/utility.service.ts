@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CustomerInterface } from '../modelsInterfaces/CustomerInterface.model';
-import { CustomerClass } from '../modelClasses/customer.model';
+import { CustomerTable } from '../modelClasses/customer-table.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,12 @@ export class UtilityService {
   private countriesInfo=[{code:'US',codeAlpha:'USA',name:'Unites States',teleCode:"+1"},
                          {code:'CA',codeAlpha:'CAN',name:'Canada',teleCode:"+1"},
                          {code:'IN',codeAlpha:'IND',name:'India',teleaCode:"+91"}];
-  private genderList=[{key:'Male',value:'M'},{key:'Female',value:'F'}];
+  private genderList=[{key:'Male',value:'m'},{key:'Female',value:'f'}];
   constructor() { }
-  filterHeaders(srcData:CustomerInterface[]):CustomerClass[]{
-    let customersFilteredData: CustomerClass[]=[];
+  filterHeaders(srcData:CustomerInterface[]):CustomerTable[]{
+    let customersFilteredData: CustomerTable[]=[];
     srcData.forEach((element)=>{
-      let tempObject= new CustomerClass(element['id'],element['firstname'],element['lastname'],element['email'],element['phone_Number'],element['country_code'],element['gender'],element['balance']);
+      let tempObject= new CustomerTable(element['id'],element['firstname'],element['lastname'],element['email'],element['phone_Number'],element['country_code'],element['gender'],element['balance']);
   
       customersFilteredData.push(tempObject);
     })

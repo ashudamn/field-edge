@@ -1,4 +1,4 @@
-export class CreateCustomer {
+export class Customer {
   id: string;
   salutation: string;
   initials: string;
