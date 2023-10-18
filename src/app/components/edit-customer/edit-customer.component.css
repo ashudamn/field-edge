@@ -13,3 +13,16 @@
 .wd-25-pct{
     width: 25%;
 }
+
+.error-container{
+    background-color: #dc3545;
+    color: whitesmoke;
+    border-color: #dc0033;
+    padding: 10px;
+}
+.success-container{
+    background-color: #28a745;
+    border-color: #58a045;
+    color: whitesmoke;
+    padding: 10px;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap,Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
@@ -13,6 +13,12 @@ import { UtilityService } from 'src/app/services/utility.service';
 })
 export class EditCustomerComponent implements OnInit {
 
+  @ViewChild("statusView", { read: ViewContainerRef }) vc!: ViewContainerRef;
+  @ViewChild("error") errorViewChild!: TemplateRef<any>;
+  @ViewChild("success") successViewChild!:TemplateRef<any>;
+  errorMessage!: string;
+  successMessage!:string;
+  
   editCustomerForm:FormGroup;
   private id:string|null;
   constructor(private route:ActivatedRoute,
@@ -61,6 +67,11 @@ export class EditCustomerComponent implements OnInit {
     this.editCustomerForm.patchValue(customerDataWithFormFormat);
   }
 
+  insertTemplateInContainer(template:TemplateRef<any>){
+    let viewTemplate=template.createEmbeddedView(null);
+    this.vc.clear();
+    this.vc.insert(viewTemplate,0);
+  }
   onSubmit(){
     if(this.editCustomerForm.invalid){
       console.log("form invalid");
@@ -106,8 +117,12 @@ export class EditCustomerComponent implements OnInit {
                                                     );
      this.customerService.postCustomer(customer).pipe(catchError(error=>{
         console.log(error);
+        this.errorMessage='Uh oh! some error occurred';
+        this.insertTemplateInContainer(this.errorViewChild);
         return throwError(error);
      })).subscribe(data=>{
+      this.successMessage="Record added successfully";
+        this.insertTemplateInContainer(this.successViewChild);
         console.log(data);
      });
 }

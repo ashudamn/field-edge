@@ -24,6 +24,9 @@ export class DashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
+   this.getDataAndPopulateCustomersTable();
+  }
+   getDataAndPopulateCustomersTable(){
     this.customerService.getCustomers().pipe(catchError(error=>{
       this.loading=false;
       return throwError(error);
@@ -33,7 +36,7 @@ export class DashboardComponent implements OnInit {
       this.populateRowAndHeaders();
       console.log(data);
     })
-  }
+   }
   showLoader():boolean{
     return this.loading;
   }
@@ -50,6 +53,7 @@ export class DashboardComponent implements OnInit {
       return throwError(error);
     })
     ).subscribe(data=>{
+      this.getDataAndPopulateCustomersTable();
       console.log(data);
     });
     

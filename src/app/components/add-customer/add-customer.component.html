@@ -1,6 +1,18 @@
 <h1>Add Customer</h1>
 <div class="back-home-btn-container"><button class="btn primary border-black " (click)="backtoHome()">Back to Home</button></div>
-
+<div>
+    <ng-container #statusView></ng-container>
+    <ng-template #error>
+        <div class="error-container">
+            <span>{{errorMessage}}</span>
+        </div>
+    </ng-template>
+    <ng-template #success>
+        <div class="success-container">
+            <span>{{successMessage}}</span>
+        </div>
+    </ng-template>
+</div>
 <div class="add-form-container">
 <form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
     <div class="form-control-container">
