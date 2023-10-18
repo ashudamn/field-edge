@@ -23,7 +23,7 @@ export class AddCustomerComponent implements OnInit {
       firstName:['',Validators.required],
       lastName:['',Validators.required],
       email:['',Validators.compose([Validators.required,Validators.email])],
-      phoneNumber:['',Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")])],
+    phoneNumber:['',Validators.compose([Validators.required/*,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")*/])],
       countryCode:['US'],
       gender:['',Validators.required],
       balance:[0],

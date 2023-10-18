@@ -15,18 +15,27 @@ export class DashboardComponent implements OnInit {
   customersResponseData:CustomerInterface[];
   customersData:any[];
   customerHeaders:string[];
+  loading: boolean;
   constructor(private customerService:CustomerService,private utilityService:UtilityService,private router:Router) {
     this.customersData=[];
     this.customersResponseData=[];
     this.customerHeaders=[];
+    this.loading=true;
    }
 
   ngOnInit(): void {
-    this.customerService.getCustomers().subscribe(data=>{
+    this.customerService.getCustomers().pipe(catchError(error=>{
+      this.loading=false;
+      return throwError(error);
+    })).subscribe(data=>{
+      this.loading=false;
       this.customersResponseData=data;
       this.populateRowAndHeaders();
       console.log(data);
     })
+  }
+  showLoader():boolean{
+    return this.loading;
   }
   populateRowAndHeaders(){
     if(this.customersResponseData && this.customersResponseData.length>0){

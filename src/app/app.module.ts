@@ -9,6 +9,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { CustomInterceptor } from './interceptors/custom-interceptor.interceptor';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { SuccessComponent } from './components/success/success.component';
+import { FailureComponent } from './components/failure/failure.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { EditCustomerComponent } from './components/edit-customer/edit-customer.
     AppComponent,
     DashboardComponent,
     AddCustomerComponent,
-    EditCustomerComponent
+    EditCustomerComponent,
+    LoaderComponent,
+    SuccessComponent,
+    FailureComponent
   ],
   imports: [
     BrowserModule,
