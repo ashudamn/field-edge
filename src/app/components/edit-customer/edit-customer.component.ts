@@ -47,6 +47,8 @@ export class EditCustomerComponent implements OnInit {
       this.id=params.get('id');
       this.customerService.getCustomerByid(this.id).pipe(catchError(error=>{
         //const errorObj=new Error(error);
+        this.router.navigateByUrl("/error");
+        this.utilityService.publishDataToErrorSubject(error);
         return throwError(()=>error);
       })).subscribe(data=>{
         let customer=data as Customer;

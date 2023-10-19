@@ -15,6 +15,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { SuccessComponent } from './components/success/success.component';
 import { FailureComponent } from './components/failure/failure.component';
 import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
+import { ErrorComponent } from './components/error/error.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.
     LoaderComponent,
     SuccessComponent,
     FailureComponent,
-    CustomDialogComponent
+    CustomDialogComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

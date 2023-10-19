@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CustomerInterface } from '../modelsInterfaces/CustomerInterface.model';
 import { CustomerTable } from '../modelClasses/customer-table.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,13 @@ export class UtilityService {
                          {code:'CA',codeAlpha:'CAN',name:'Canada',teleCode:"+1"},
                          {code:'IN',codeAlpha:'IND',name:'India',teleCode:"+91"}];
   private genderList=[{key:'Male',value:'m'},{key:'Female',value:'f'}];
-  constructor() { }
+  private errorBehaviourSubject: BehaviorSubject<any>;
+  constructor() {
+    this.errorBehaviourSubject=new BehaviorSubject<any>(null);
+   }
   filterHeaders(srcData:CustomerInterface[]):CustomerTable[]{
     let customersFilteredData: CustomerTable[]=[];
+
     srcData.forEach((element)=>{
       let tempObject= new CustomerTable(element['id'],element['firstname'],element['lastname'],element['email'],element['phone_Number'],element['country_code'],element['gender'],element['balance']);
   
@@ -31,5 +36,11 @@ export class UtilityService {
   }
   getCountriesList():any[]{
     return this.countriesInfo;
+  }
+  publishDataToErrorSubject(data:any){
+    this.errorBehaviourSubject.next(data);
+  }
+  getErrorSubject(){
+    return this.errorBehaviourSubject;
   }
 }
