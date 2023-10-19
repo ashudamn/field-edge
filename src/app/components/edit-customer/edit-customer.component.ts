@@ -32,6 +32,7 @@ export class EditCustomerComponent implements OnInit {
       lastName:['',Validators.required],
       email:['',Validators.compose([Validators.required,Validators.email])],
       phoneNumber:['',Validators.compose([Validators.required])],
+      teleCodeOfPhoneNumber:['',Validators.required],
       countryCode:['US'],
       gender:['',Validators.required],
       balance:[0],
@@ -45,7 +46,8 @@ export class EditCustomerComponent implements OnInit {
       console.log('subscribe param-map',params);
       this.id=params.get('id');
       this.customerService.getCustomerByid(this.id).pipe(catchError(error=>{
-        return throwError(error);
+        const errorObj=new Error(error);
+        return throwError(()=>errorObj);
       })).subscribe(data=>{
         let customer=data as Customer;
         this.patchDataToForm(customer);
@@ -54,11 +56,15 @@ export class EditCustomerComponent implements OnInit {
     });
   }
   patchDataToForm(customer: Customer) {
+    let teleCodeWithPhoneNumber=customer.phone_Number.split(" ");
+    const teleCode=teleCodeWithPhoneNumber[0];
+    const phoneNumber=teleCodeWithPhoneNumber[1];
     let customerDataWithFormFormat={
       firstName:customer.firstname,
       lastName:customer.lastname,
       email:customer.email,
-      phoneNumber:customer.phone_Number,
+      teleCodeOfPhoneNumber:teleCode,
+      phoneNumber:phoneNumber,
       countryCode:customer.country_code,
       gender:customer.gender,
       balance:customer.balance,
@@ -119,7 +125,8 @@ export class EditCustomerComponent implements OnInit {
         console.log(error);
         this.errorMessage='Uh oh! some error occurred';
         this.insertTemplateInContainer(this.errorViewChild);
-        return throwError(error);
+        const errorObj=new Error(error);
+        return throwError(()=>errorObj);
      })).subscribe(data=>{
       this.successMessage="Record added successfully";
         this.insertTemplateInContainer(this.successViewChild);

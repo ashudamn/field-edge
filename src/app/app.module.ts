@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +14,7 @@ import { EditCustomerComponent } from './components/edit-customer/edit-customer.
 import { LoaderComponent } from './components/loader/loader.component';
 import { SuccessComponent } from './components/success/success.component';
 import { FailureComponent } from './components/failure/failure.component';
+import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 
 
 @NgModule({
@@ -22,14 +25,20 @@ import { FailureComponent } from './components/failure/failure.component';
     EditCustomerComponent,
     LoaderComponent,
     SuccessComponent,
-    FailureComponent
+    FailureComponent,
+    CustomDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
+  ],
+  entryComponents:[
+    CustomDialogComponent
   ],
   providers: [
     { 

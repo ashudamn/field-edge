@@ -28,7 +28,8 @@ export class AddCustomerComponent implements OnInit {
       firstName:['',Validators.required],
       lastName:['',Validators.required],
       email:['',Validators.compose([Validators.required,Validators.email])],
-    phoneNumber:['',Validators.compose([Validators.required/*,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")*/])],
+      teleCodeOfPhoneNumber:['+91',Validators.required],
+      phoneNumber:['',Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")])],
       countryCode:['US'],
       gender:['',Validators.required],
       balance:[0],
@@ -64,6 +65,7 @@ export class AddCustomerComponent implements OnInit {
       let country_frequency=(randomWholeNumber+1000).toString();
       let fname_ascii= this.addCustomerForm.value.firstName.toLowerCase();
       let lname_ascii= this.addCustomerForm.value.lastName.toLowerCase();
+      let phoneNumberWithTeleCode=`${this.addCustomerForm.value.teleCodeOfPhoneNumber?.trim()} ${this.addCustomerForm.value.phoneNumber}`;
       let customer:Customer=new Customer(customerId,
                                                       salutation,
                                                       initials,
@@ -84,14 +86,15 @@ export class AddCustomerComponent implements OnInit {
                                                       primaryLanguageCode,
                                                       primaryLanguage,
                                                       this.addCustomerForm.value.balance,
-                                                      this.addCustomerForm.value.phoneNumber,
+                                                      phoneNumberWithTeleCode,
                                                       currency
                                                       );
        this.customerService.postCustomer(customer).pipe(catchError(error=>{
           console.log(error);
           this.errorMessage='Uh oh! some error occurred';
           this.insertTemplateInContainer(this.errorViewChild);
-          return throwError(error);
+          const errorObj=new Error(error);
+          return throwError(()=>errorObj);
        })).subscribe(data=>{
         this.successMessage="Record added successfully";
         this.insertTemplateInContainer(this.successViewChild);
@@ -105,7 +108,7 @@ export class AddCustomerComponent implements OnInit {
   getGenderList():any[]{
     return this.utilityService.getGenderList();
   }
-  getCountriesList(){
+  getCountriesInfo(){
     return this.utilityService.getCountriesList();
   }
 }

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,VERSION } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CustomerService } from 'src/app/services/customer.service';
 import { CustomerInterface } from 'src/app/modelsInterfaces/CustomerInterface.model';
 import { UtilityService } from 'src/app/services/utility.service';
 import { catchError, throwError } from 'rxjs';
+import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,7 +18,12 @@ export class DashboardComponent implements OnInit {
   customersData:any[];
   customerHeaders:string[];
   loading: boolean;
-  constructor(private customerService:CustomerService,private utilityService:UtilityService,private router:Router) {
+  customDialog!: MatDialogRef<CustomDialogComponent>;
+  constructor(private customerService:CustomerService,
+                private utilityService:UtilityService,
+                private router:Router,
+                private dialogModel:MatDialog) {
+    console.log(VERSION);
     this.customersData=[];
     this.customersResponseData=[];
     this.customerHeaders=[];
@@ -29,7 +36,8 @@ export class DashboardComponent implements OnInit {
    getDataAndPopulateCustomersTable(){
     this.customerService.getCustomers().pipe(catchError(error=>{
       this.loading=false;
-      return throwError(error);
+      const errorObj=new Error(error);
+          return throwError(()=>errorObj);
     })).subscribe(data=>{
       this.loading=false;
       this.customersResponseData=data;
@@ -48,15 +56,34 @@ export class DashboardComponent implements OnInit {
   }
   delete(event:any,customer:any){
     console.log("delete",customer);
-    this.customerService.deleteCustomer(customer.CustomerId).pipe(catchError(error=>{
+    this.customDialog=this.dialogModel.open(CustomDialogComponent,{
+      width:"250px",
+      data: { name: customer.FirstName } 
+    });
+    this.customDialog.afterClosed().pipe(catchError(error=>{
+      const errorObj=new Error(error);
+      return throwError(()=>errorObj);
+    })).subscribe(data=>{
+      if(data==="YES"){
+        this.loading=true;
+        this.onSuccessfullDelete(customer.CustomerId);
+      }
+    })
+   
+    
+  }
+  onSuccessfullDelete(customerId:string){
+    this.customerService.deleteCustomer(customerId).pipe(catchError(error=>{
+      this.loading=false;
       console.log(error);
-      return throwError(error);
+      const errorObj=new Error(error);
+          return throwError(()=>errorObj);
     })
     ).subscribe(data=>{
+      this.loading=false;
       this.getDataAndPopulateCustomersTable();
       console.log(data);
     });
-    
   }
   edit(event:any,customer:any){
     console.log("edit",customer);

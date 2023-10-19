@@ -11,7 +11,7 @@ export class UtilityService {
   private currency=['USD','CAD','INR'];
   private countriesInfo=[{code:'US',codeAlpha:'USA',name:'Unites States',teleCode:"+1"},
                          {code:'CA',codeAlpha:'CAN',name:'Canada',teleCode:"+1"},
-                         {code:'IN',codeAlpha:'IND',name:'India',teleaCode:"+91"}];
+                         {code:'IN',codeAlpha:'IND',name:'India',teleCode:"+91"}];
   private genderList=[{key:'Male',value:'m'},{key:'Female',value:'f'}];
   constructor() { }
   filterHeaders(srcData:CustomerInterface[]):CustomerTable[]{
