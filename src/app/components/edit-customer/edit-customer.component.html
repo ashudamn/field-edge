@@ -44,9 +44,16 @@
                     && editCustomerForm.get('email')?.touched">Email is not valid</span>
                 </div>
                 </div>
-    
                 <div class="form-control-container">
-                    <div><label for="phone-number">*Phone Number:</label></div>
+                    <div><label for="country-tele-code">*Country Tele Code</label></div>
+                    <div><select class="wd-25-pct" id="country-tele-code" formControlName="teleCodeOfPhoneNumber">
+                        <option *ngFor="let op of getCountriesInfo()" [ngValue]="op.teleCode">{{op.teleCode}}</option>
+                    </select>
+                    </div>
+                   
+                </div>
+                <div class="form-control-container">
+                    <div><label for="phone-number">*Phone Number:(should be in 123-456-7890 format)</label></div>
                     <div><input class="wd-25-pct" id="phone-number" type="text" formControlName="phoneNumber"/></div>
                     <div><span class="text-danger" *ngIf="editCustomerForm.get('phoneNumber')?.errors 
                                                     && editCustomerForm.get('phoneNumber')?.hasError('required')
@@ -71,7 +78,7 @@
                 <div class="form-control-container">
                     <div><label for="country-code">Country</label></div>
                     <div><select class="wd-25-pct" id="country-code" formControlName="countryCode">
-                        <option *ngFor="let op of getCountriesList()" [ngValue]="op.code">{{op.name}}</option>
+                        <option *ngFor="let op of getCountriesInfo()" [ngValue]="op.code">{{op.name}}</option>
                     </select>
                     </div>
                    

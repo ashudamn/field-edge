@@ -46,8 +46,8 @@ export class EditCustomerComponent implements OnInit {
       console.log('subscribe param-map',params);
       this.id=params.get('id');
       this.customerService.getCustomerByid(this.id).pipe(catchError(error=>{
-        const errorObj=new Error(error);
-        return throwError(()=>errorObj);
+        //const errorObj=new Error(error);
+        return throwError(()=>error);
       })).subscribe(data=>{
         let customer=data as Customer;
         this.patchDataToForm(customer);
@@ -125,8 +125,8 @@ export class EditCustomerComponent implements OnInit {
         console.log(error);
         this.errorMessage='Uh oh! some error occurred';
         this.insertTemplateInContainer(this.errorViewChild);
-        const errorObj=new Error(error);
-        return throwError(()=>errorObj);
+        ////const errorObj=new Error(error);
+        return throwError(()=>error);
      })).subscribe(data=>{
       this.successMessage="Record added successfully";
         this.insertTemplateInContainer(this.successViewChild);
@@ -140,7 +140,7 @@ export class EditCustomerComponent implements OnInit {
   getGenderList():any[]{
     return this.utilityService.getGenderList();
   }
-  getCountriesList(){
+  getCountriesInfo(){
     return this.utilityService.getCountriesList();
   }
   

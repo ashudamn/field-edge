@@ -1,4 +1,4 @@
-import { TemplateLiteral } from '@angular/compiler';
+
 import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class AddCustomerComponent implements OnInit {
       lastName:['',Validators.required],
       email:['',Validators.compose([Validators.required,Validators.email])],
       teleCodeOfPhoneNumber:['+91',Validators.required],
-      phoneNumber:['',Validators.compose([Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")])],
+      phoneNumber:['',Validators.compose([Validators.required,Validators.minLength(12),Validators.pattern("[0-9]{3}-[0-9]{3}-[0-9]{4}")])],
       countryCode:['US'],
       gender:['',Validators.required],
       balance:[0],
@@ -93,8 +93,8 @@ export class AddCustomerComponent implements OnInit {
           console.log(error);
           this.errorMessage='Uh oh! some error occurred';
           this.insertTemplateInContainer(this.errorViewChild);
-          const errorObj=new Error(error);
-          return throwError(()=>errorObj);
+          //const errorObj=new Error(error);
+          return throwError(()=>error);
        })).subscribe(data=>{
         this.successMessage="Record added successfully";
         this.insertTemplateInContainer(this.successViewChild);

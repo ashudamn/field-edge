@@ -54,15 +54,15 @@
             </div>
 
             <div class="form-control-container">
-                <div><label for="phone-number">*Phone Number:</label></div>
-                <div><input class="wd-25-pct" id="phone-number" type="text" formControlName="phoneNumber"/></div>
+                <div><label for="phone-number">*Phone Number:(should be in 123-456-7890 format)</label></div>
+                <div><input class="wd-25-pct" id="phone-number" type="tel" formControlName="phoneNumber"/></div>
                 <div><span class="text-danger" *ngIf="addCustomerForm.get('phoneNumber')?.errors 
                                                 && addCustomerForm.get('phoneNumber')?.hasError('required')
                                                 && addCustomerForm.get('phoneNumber')?.touched">phone number is required</span>
                 </div>
                 <div><span class="text-danger" *ngIf="addCustomerForm.get('phoneNumber')?.errors 
                     && addCustomerForm.get('phoneNumber')?.hasError('minlength')
-                    && addCustomerForm.get('phoneNumber')?.touched">phone number does not meet min length of 10</span>
+                    && addCustomerForm.get('phoneNumber')?.touched">phone number does not meet min length of 12</span>
                 </div>
                 <div><span class="text-danger" *ngIf="addCustomerForm.get('phoneNumber')?.errors 
                     && addCustomerForm.get('phoneNumber')?.hasError('pattern')

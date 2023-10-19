@@ -36,8 +36,8 @@ export class DashboardComponent implements OnInit {
    getDataAndPopulateCustomersTable(){
     this.customerService.getCustomers().pipe(catchError(error=>{
       this.loading=false;
-      const errorObj=new Error(error);
-          return throwError(()=>errorObj);
+      //const errorObj=new Error(error);
+          return throwError(()=>error);
     })).subscribe(data=>{
       this.loading=false;
       this.customersResponseData=data;
@@ -61,8 +61,8 @@ export class DashboardComponent implements OnInit {
       data: { name: customer.FirstName } 
     });
     this.customDialog.afterClosed().pipe(catchError(error=>{
-      const errorObj=new Error(error);
-      return throwError(()=>errorObj);
+      //const errorObj=new Error(error);
+      return throwError(()=>error);
     })).subscribe(data=>{
       if(data==="YES"){
         this.loading=true;
@@ -76,8 +76,8 @@ export class DashboardComponent implements OnInit {
     this.customerService.deleteCustomer(customerId).pipe(catchError(error=>{
       this.loading=false;
       console.log(error);
-      const errorObj=new Error(error);
-          return throwError(()=>errorObj);
+      //const errorObj=new Error(error);
+          return throwError(()=>error);
     })
     ).subscribe(data=>{
       this.loading=false;
