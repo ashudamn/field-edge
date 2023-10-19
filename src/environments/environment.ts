@@ -4,11 +4,12 @@
 
 export const environment = {
   production: false,
-  api:'https://getinvoices.azurewebsites.net/api/',
-  getCustomersRoute:'Customers',
-  postCustomerRoute:'Customer',
-  deleteCustomerRoute:'Customer',
-  getCustomerByIdRoute:'Customer'
+  api:'https://localhost:5001/api/Customers/',
+  getCustomersRoute:'GetAllCustomers',
+  postCustomerRoute:'CreateCustomer',
+  deleteCustomerRoute:'Delete',
+  getCustomerByIdRoute:'GetCustomer',
+  updateCustomerRoute:'Update'
 };
 
 /*

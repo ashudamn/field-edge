@@ -25,4 +25,9 @@ export class CustomerService {
   getCustomerByid(id:string|null){
     return this.httpClient.get(`${environment.api}${environment.getCustomerByIdRoute}/${id}`);
   }
+  updateCustomer(customer:Customer):Observable<any>{
+    const headers={'content-type':'application/json'};
+    const jsonStringBody=JSON.stringify(customer);
+    return this.httpClient.put(`${environment.api}${environment.updateCustomerRoute}/${customer.id}`,jsonStringBody,{'headers':headers});
+  }
 }

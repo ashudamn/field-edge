@@ -123,7 +123,7 @@ export class EditCustomerComponent implements OnInit {
                                                     this.editCustomerForm.value.phoneNumber,
                                                     currency
                                                     );
-     this.customerService.postCustomer(customer).pipe(catchError(error=>{
+     this.customerService.updateCustomer(customer).pipe(catchError(error=>{
         console.log(error);
         this.errorMessage='Uh oh! some error occurred';
         this.insertTemplateInContainer(this.errorViewChild);
